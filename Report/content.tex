@@ -145,6 +145,7 @@ is trained based on the previous models performance.
 % TODO: Add graphic for Training
 
 % Boosting prediction
+% TODO: let GPT check
 In contrast to the training, each model makes its individual prediction in boosting.
 Which means the predictions can be done in parallel.
 Unlike bagging where each models prediction is given equal weight, boosting uses
@@ -154,6 +155,26 @@ For classification problems this could mean that the vote of each model can have
 a different influence on the final ensemble prediciton.
 For regression problems, the final prediction is the weighted average of the
 predictions from all models.
+
+% When to use boosting (Advantages)
+Boosting is ideal to use when the base learning algorithm suffers from high bias.
+Its combated through the way the ensemble is trained, as each model focuses on the
+weaknesses of the previous one.
+Additionally, boosting is particularly effective with high-dimensional data, where
+the number of features is large. Other models might not be able to capture the 
+complexity or larger models might overfit. However, boosting can strike a 
+balance by incrementally building complexity and focusing on features that improve
+the predictive performance.
+Also its important to know that boosting works best on datasets with little to no
+outliers. The ensemble strongly focuses on correcting errors. Outliers can 
+disproportionately influence the direction of the learning process, leading
+to overfitting.
+
+
+% Boosting summary
+To put it in then nutshell, boosting can help to reduce bias, avoid underfitting
+and can help to built overall precise models. Nevertheless you have to be aware
+of the challenges with boosting e.g. noisy data.
 
 %\begin{itemize}
 %    \item Whats the idea behind it?
