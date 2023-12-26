@@ -41,19 +41,19 @@ Overall, there are many different ensemble methods, such as bagging and boosting
 which we will go into more detail in this report. However, there are many more 
 like stacking and blending.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=.5\textwidth]{figures/ensemble_method_prediction}
-    \caption{Ensemble learning prediction.}
-\end{figure}
-
 % TODO: Make image prettier
+%\begin{figure}[htbp]
+%    \centering
+%    \includegraphics[width=.5\textwidth]{figures/ensemble_method_prediction}
+%    \caption{Ensemble learning prediction.}
+%\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Bagging}
 
+% Intro Bagging and Traing
 Bootstrap Aggregating, commonly known as bagging, is an ensemble learning method
-developed by Leo Breiman. The models for the ensemble get trained individually
+developed by \citet*{Breiman1996}. The models for the ensemble get trained individually
 by using the bootstrapping technique. Bootstrapping involves creating random
 subsets of the original training dataset. The subsets are created by drawing 
 random data point with replacement and have the same size as the original
@@ -61,9 +61,21 @@ training dataset. This means that data points can be chosen more than once and
 that some data points might not be in the subset. The models can be trained in
 parallel, because of the individual training.
 
-% TODO: describe how the selection can work -> duplicates + some completely missing (whats the result) -> get better when combining
-% TODO: create figure that shows the shows the process (similar to the one from wikipedia but just the bootstrapping proccess)
 
+Figure 1 shows how bootstrapping might work on an imaginary dataset. In subset 1
+each class is equally distributed. Subset 2 has a focus on the red and orange bubles.
+The subset N has a strong focus on blue, however it doesn't even have a single 
+orange buble. This will probably mean that the model trained on subset N will be very
+good at predicting blue, but not very accurate with orange.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/bootstrapping}
+    \caption{Creating subsets with bootstrapping.}
+\end{figure}
+
+% Prediction Bagging
+% TODO: let GPT check
 In the bagging ensemble each model makes its prediction independently. Because of
 that the predictions of the individual models can be ran in parallel, similar to
 the training. Once every model in the ensemble has made their prediction, they get
@@ -75,23 +87,31 @@ final ensemble prediciton.
 For regression problems the predictions of the individual models are typically 
 averaged.
 
-% TODO: add figure on how bagging predictions work -> wikipedia image can be used as inspiration
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/bagging_prediction}
+    \caption{Bagging prediction.}
+\end{figure}
 
-% Intro Bagging
 
-% Training
+% When to use bagging (Advantages)
+% Utilizing Multiple Cores for Parallel Training / Prediction could be added
+Bagging can be particularly effective when using base learning algorithms
+that have high variance or tend to overfit quickly. By bootstrapping and 
+averaging the predictions the variance gets reduced and potential overfitting
+is avoided.
+Same goes for unstable learning algorithms, that produce significantly different
+results on small changes in the data. Thats why bagging is often used with decision
+trees as they tend to be unstable and to have high variance.
+Additionally, bagging can be very helpful when dealing with noisy, imbalanced 
+datasets or datasets with missing data. The bootstrapping helps to create 
+diverse datasets with each class being adequately represented and also averaging
+out the noise in combination with aggregation.
 
-%\begin{itemize}
-%    \item Whats the idea behind it?
-%    \item How to train bagging? (+ graphic)
-%    \item How does the prediction work? (+ graphic)
-%    \item when to use it
-%    \item advantages and challenges
-%\end{itemize}
 
-% Emphasize Key Concepts: While you correctly describe the bootstrapping process, emphasizing why this is important could add depth. For instance: "This bootstrapping process introduces diversity in the training data for each model, which is crucial for reducing overfitting and improving the robustness of the ensemble."
-% Highlight the Importance of Parallel Training: You mention that models can be trained in parallel due to their individual training. Expanding on why this is beneficial could be informative. For instance: "The ability to train models in parallel significantly enhances the efficiency of the bagging method, making it suitable for large datasets and complex models."
-
+% Summary
+All in all, bagging can help to reduce variance, prevent overfitting and to built
+a more resilient, robust and generalized model.
 
 \subsection{Random Forest}
 %\begin{itemize}
