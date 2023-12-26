@@ -56,7 +56,7 @@ Bootstrap Aggregating, commonly known as bagging, is an ensemble learning method
 developed by \citet*{Breiman1996}. The models for the ensemble get trained individually
 by using the bootstrapping technique. Bootstrapping involves creating random
 subsets of the original training dataset. The subsets are created by drawing 
-random data point with replacement and have the same size as the original
+random data points with replacement and have the same size as the original
 training dataset. This means that data points can be chosen more than once and
 that some data points might not be in the subset. The models can be trained in
 parallel, because of the individual training.
@@ -96,6 +96,7 @@ averaged.
 
 % When to use bagging (Advantages)
 % Utilizing Multiple Cores for Parallel Training / Prediction could be added
+% TODO: let GPT check
 Bagging can be particularly effective when using base learning algorithms
 that have high variance or tend to overfit quickly. By bootstrapping and 
 averaging the predictions the variance gets reduced and potential overfitting
@@ -120,7 +121,40 @@ a more resilient, robust and generalized model.
 
 % TODO: adden wenn noch Platz - \subsection{Out-of-bag}
 
+% ---------------------------------------------------------------------------- %
 \subsection{Boosting}
+% TODO: let GPT check
+Boosting \citep{Schapire1990} is another ensemble learning method like bagging.
+However, unlike bagging, boosting trains the models sequentially, where each
+model learns from the mistakes of its predecessors.
+In the first step the data subset for the first model gets created and a model 
+is trained on it. The dataset is equally weighted, which means it works the same 
+as bagging: data points are drawn with replacement until the subset has the same
+size as the original dataset.
+In the second step, the performance of the model gets evaluated. The weight gets
+increased for incorrectly predicted samples and decreased for correctly predicted
+samples. 
+In the third step, the next model is trained on the datase with the updated weights.
+Because of the weight change, the model will more likely get trained on data which
+previous models are not good at.
+Steps 2 and 3, the process of updating weights and training new models now gets 
+repeated until all models are trained.
+Different from bagging, boosting can't be trained in parallel, because each model
+is trained based on the previous models performance. 
+
+% TODO: Add graphic for Training
+
+% Boosting prediction
+In contrast to the training, each model makes its individual prediction in boosting.
+Which means the predictions can be done in parallel.
+Unlike bagging where each models prediction is given equal weight, boosting uses
+a weighted average approach to combine the individual predictions. This means
+each model has its own weight based on the performance in the training phase.
+For classification problems this could mean that the vote of each model can have
+a different influence on the final ensemble prediciton.
+For regression problems, the final prediction is the weighted average of the
+predictions from all models.
+
 %\begin{itemize}
 %    \item Whats the idea behind it?
 %    \item How to train boosting? (+ graphic)
