@@ -49,7 +49,38 @@ like stacking and blending.
 
 % TODO: Make image prettier
 
+% ---------------------------------------------------------------------------- %
 \subsection{Bagging}
+
+Bootstrap Aggregating, commonly known as bagging, is an ensemble learning method
+developed by Leo Breiman. The models for the ensemble get trained individually
+by using the bootstrapping technique. Bootstrapping involves creating random
+subsets of the original training dataset. The subsets are created by drawing 
+random data point with replacement and have the same size as the original
+training dataset. This means that data points can be chosen more than once and
+that some data points might not be in the subset. The models can be trained in
+parallel, because of the individual training.
+
+% TODO: describe how the selection can work -> duplicates + some completely missing (whats the result) -> get better when combining
+% TODO: create figure that shows the shows the process (similar to the one from wikipedia but just the bootstrapping proccess)
+
+In the bagging ensemble each model makes its prediction independently. Because of
+that the predictions of the individual models can be ran in parallel, similar to
+the training. Once every model in the ensemble has made their prediction, they get
+aggregated to form a final ensemble prediction. The method of aggregation depends
+on the problem that is being solved by the bagging ensemble. 
+For classification problems a common method is majority voting. Each model votes 
+for a particular class. The class that receives the most votes is chosen for the
+final ensemble prediciton.
+For regression problems the predictions of the individual models are typically 
+averaged.
+
+% TODO: add figure on how bagging predictions work -> wikipedia image can be used as inspiration
+
+% Intro Bagging
+
+% Training
+
 %\begin{itemize}
 %    \item Whats the idea behind it?
 %    \item How to train bagging? (+ graphic)
@@ -58,15 +89,16 @@ like stacking and blending.
 %    \item advantages and challenges
 %\end{itemize}
 
+% Emphasize Key Concepts: While you correctly describe the bootstrapping process, emphasizing why this is important could add depth. For instance: "This bootstrapping process introduces diversity in the training data for each model, which is crucial for reducing overfitting and improving the robustness of the ensemble."
+% Highlight the Importance of Parallel Training: You mention that models can be trained in parallel due to their individual training. Expanding on why this is beneficial could be informative. For instance: "The ability to train models in parallel significantly enhances the efficiency of the bagging method, making it suitable for large datasets and complex models."
+
+
 \subsection{Random Forest}
 %\begin{itemize}
 %    \item difference to bagging
 %\end{itemize}
 
-\subsection{Out-of-bag}
-%\begin{itemize}
-%    \item explain
-%\end{itemize}
+% TODO: adden wenn noch Platz - \subsection{Out-of-bag}
 
 \subsection{Boosting}
 %\begin{itemize}
@@ -101,6 +133,7 @@ If possible: What are open challenges?
 \begin{itemize}
     \item Bagging vs. Boosting - whats the difference?
 \end{itemize}
+
 
 %\newpage
 %\section{\LaTeX Examples}
