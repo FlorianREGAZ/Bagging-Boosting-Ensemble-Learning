@@ -56,9 +56,9 @@ parallel, because of the individual training.
 
 
 Figure 1 shows how bootstrapping might work on an imaginary dataset. In subset 1
-each class is equally distributed. Subset 2 has a focus on the red and orange bubles.
+each class is equally distributed. Subset 2 has a focus on the red and orange bubbles.
 The subset N has a strong focus on blue, however it doesn't even have a single 
-orange buble. This will probably mean that the model trained on subset N will be very
+orange bubble. This will probably mean that the model trained on subset N will be very
 good at predicting blue, but not very accurate with orange.
 
 \begin{figure}[htbp]
@@ -68,16 +68,15 @@ good at predicting blue, but not very accurate with orange.
 \end{figure}
 
 % Prediction Bagging
-% TODO: let GPT check
-In the bagging ensemble each model makes its prediction independently. Because of
-that the predictions of the individual models can be ran in parallel, similar to
+In the bagging ensemble, each model makes its prediction independently. Because of
+that the predictions of the individual models can be run in parallel, similar to
 the training. Once every model in the ensemble has made their prediction, they get
 aggregated to form a final ensemble prediction. The method of aggregation depends
 on the problem that is being solved by the bagging ensemble. 
-For classification problems a common method is majority voting. Each model votes 
+For classification problems, a common method is majority voting. Each model votes 
 for a particular class. The class that receives the most votes is chosen for the
-final ensemble prediciton.
-For regression problems the predictions of the individual models are typically 
+final ensemble prediction.
+For regression problems, the predictions of the individual models are typically 
 averaged.
 
 \begin{figure}[htbp]
@@ -89,13 +88,12 @@ averaged.
 
 % When to use bagging (Advantages)
 % Utilizing Multiple Cores for Parallel Training / Prediction could be added
-% TODO: let GPT check
 Bagging can be particularly effective when using base learning algorithms
 that have high variance or tend to overfit quickly. By bootstrapping and 
-averaging the predictions the variance gets reduced and potential overfitting
+averaging the predictions, the variance gets reduced and potential overfitting
 is avoided.
-Same goes for unstable learning algorithms, that produce significantly different
-results on small changes in the data. Thats why bagging is often used with decision
+The same goes for unstable learning algorithms, that produce significantly different
+results on small changes in the data. That's why bagging is often used with decision
 trees as they tend to be unstable and to have high variance.
 Additionally, bagging can be very helpful when dealing with noisy, imbalanced 
 datasets or datasets with missing data. The bootstrapping helps to create 
@@ -104,8 +102,8 @@ out the noise in combination with aggregation.
 
 
 % Summary
-All in all, bagging can help to reduce variance, prevent overfitting and to built
-a more resilient, robust and generalized model.
+All in all, bagging can help to reduce variance, prevent overfitting, and to build
+a more resilient, robust, and generalized model.
 
 \subsection{Random Forest}
 %\begin{itemize}
@@ -116,24 +114,23 @@ a more resilient, robust and generalized model.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
-% TODO: let GPT check
-Boosting \citep{Schapire1990} is another ensemble learning method like bagging.
+Boosting Schapire is another ensemble learning method like bagging.
 However, unlike bagging, boosting trains the models sequentially, where each
 model learns from the mistakes of its predecessors.
-In the first step the data subset for the first model gets created and a model 
-is trained on it. The dataset is equally weighted, which means it works the same 
-as bagging: data points are drawn with replacement until the subset has the same
-size as the original dataset.
-In the second step, the performance of the model gets evaluated. The weight gets
+In the first step, the data subset for the first model gets created and a model 
+is trained on it. Initially, the dataset is equally weighted, similar to the initial
+setup in bagging: data points are drawn with replacement until the subset has the 
+same size as the original dataset.
+In the second step, the performance of the model is evaluated. The weight gets
 increased for incorrectly predicted samples and decreased for correctly predicted
 samples. 
-In the third step, the next model is trained on the datase with the updated weights.
-Because of the weight change, the model will more likely get trained on data which
-previous models are not good at.
-Steps 2 and 3, the process of updating weights and training new models now gets 
+In the third step, the next model is trained on the dataset with the updated weights.
+This weight adjustment makes the next model focus more on the data points that 
+previous models predicted incorrectly.
+Steps two and three, the process of updating weights and training new models now gets 
 repeated until all models are trained.
 Different from bagging, boosting can't be trained in parallel, because each model
-is trained based on the previous models performance. 
+is trained based on the previous model's performance. 
 
 \begin{figure}[htbp]
     \centering
@@ -142,44 +139,35 @@ is trained based on the previous models performance.
 \end{figure}
 
 % Boosting prediction
-% TODO: let GPT check
 In contrast to the training, each model makes its individual prediction in boosting.
-Which means the predictions can be done in parallel.
-Unlike bagging where each models prediction is given equal weight, boosting uses
+This means the predictions can be done in parallel.
+Unlike bagging where each model's prediction is given equal weight, boosting uses
 a weighted average approach to combine the individual predictions. This means
 each model has its own weight based on the performance in the training phase.
-For classification problems this could mean that the vote of each model can have
-a different influence on the final ensemble prediciton.
-For regression problems, the final prediction is the weighted average of the
-predictions from all models.
+For classification problems, this means that the vote of each model can have
+a different influence on the final ensemble prediction.
+In the case of regression problems, the final prediction is the weighted average
+of the predictions from all models.
 
 % When to use boosting (Advantages)
 Boosting is ideal to use when the base learning algorithm suffers from high bias.
-Its combated through the way the ensemble is trained, as each model focuses on the
+This is combated through the way the ensemble is trained, as each model focuses on the
 weaknesses of the previous one.
 Additionally, boosting is particularly effective with high-dimensional data, where
 the number of features is large. Other models might not be able to capture the 
-complexity or larger models might overfit. However, boosting can strike a 
-balance by incrementally building complexity and focusing on features that improve
-the predictive performance.
-Also its important to know that boosting works best on datasets with little to no
-outliers. The ensemble strongly focuses on correcting errors. Outliers can 
+complexity or more complex models might overfit.
+However, boosting can strike a balance by incrementally building complexity and 
+focusing on features that improve the predictive performance.
+Furthermore, it's important to note that boosting works best on datasets with little 
+to no outliers. The ensemble strongly focuses on correcting errors. Outliers can 
 disproportionately influence the direction of the learning process, leading
 to overfitting.
 
 
 % Boosting summary
-To put it in then nutshell, boosting can help to reduce bias, avoid underfitting
-and can help to built overall precise models. Nevertheless you have to be aware
+To put it in a nutshell, boosting can help to reduce bias, avoid underfitting,
+and can help to build overall precise models. Nevertheless, you have to be aware
 of the challenges with boosting e.g. noisy data.
-
-%\begin{itemize}
-%    \item Whats the idea behind it?
-%    \item How to train boosting? (+ graphic)
-%    \item How does the prediction work? (+ graphic)
-%    \item when to use it
-%    \item advantages and challenges of using it
-%\end{itemize}
 
 \subsection{Gradient Boosting}
 %\begin{itemize}
@@ -205,47 +193,3 @@ If possible: What are open challenges?
 \begin{itemize}
     \item Bagging vs. Boosting - whats the difference?
 \end{itemize}
-
-
-%\newpage
-%\section{\LaTeX Examples}
-%As a help to get started with this template. To be deleted for submission.
-%\subsection{Citation examples}
-%\citet{campbell:2017} define the stages of information processing in a nervous system as: "sensory input, integration, and motor output". \\
-%The stages of information processing in a nervous system are defined as: "sensory input, integration, and motor output" \citep{campbell:2017}. 
-%
-%\subsection{Table example}
-%\input{tables/random_numbers}
-%
-%\subsection{Figure examples}
-%This is a png file, it gets blurry when you zoom in:
-%\begin{figure}[htbp]
-%    \centering
-%    \includegraphics[width=.7\textwidth]{figures/leaky_integration.png}
-%    \caption{Symbolic representation of a leaky integrating neuron.}
-%    \label{fig:leaky_integration}
-%\end{figure}
-%
-%This is an eps file, it is always sharp:\\
-%Notice how the formatting option "[htbp]" allows for the figure to be moved around to page \pageref{fig:activation_function}. Hence, it is best to rather write: The eps file in figure \ref{fig:activation_function} always stays sharp.
-%\begin{figure}[htbp]
-%    \centering
-%    \includegraphics[width=.7\textwidth]{figures/activation_functions}
-%    \caption{Shapes of a parametrized tanh activation function.}
-%    \label{fig:activation_function}
-%\end{figure}
-%
-%\subsection{Math example}
-%The state update of the leaky integrating neuron in figure \ref{fig:leaky_integration} can be formulated as:
-%\begin{align}
-%    x_i(t+1) &= \lambda_i \cdot \left(W_{i,j} \cdot U_j(t)\right) + (1-\lambda_i) \cdot \theta_i(t)
-%    \label{eq:leaky_integration}
-%\end{align}
-%
-%\subsection{Code block example}
-%From equation \ref{eq:leaky_integration} the neuron model is implemented using numpy \citep{harris:2020}:
-%
-%\lstinputlisting[label=py:leaky, language=Python, caption=Python implementation of a single leaky-integrating neuron.]{code/leaky.py}
-%
-%\subsection{Footnote example}
-%The implementation is available on github\footnote{https://github.com/schniewmatz/recurrence}.
