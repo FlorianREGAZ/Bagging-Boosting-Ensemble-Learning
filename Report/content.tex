@@ -41,13 +41,6 @@ Overall, there are many different ensemble methods, such as bagging and boosting
 which we will go into more detail in this report. However, there are many more 
 like stacking and blending.
 
-% TODO: Make image prettier
-%\begin{figure}[htbp]
-%    \centering
-%    \includegraphics[width=.5\textwidth]{figures/ensemble_method_prediction}
-%    \caption{Ensemble learning prediction.}
-%\end{figure}
-
 % ---------------------------------------------------------------------------- %
 \subsection{Bagging}
 
@@ -90,7 +83,7 @@ averaged.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.5\textwidth]{figures/bagging_prediction}
-    \caption{Bagging prediction.}
+    \caption{Bagging prediction example}
 \end{figure}
 
 
@@ -142,7 +135,11 @@ repeated until all models are trained.
 Different from bagging, boosting can't be trained in parallel, because each model
 is trained based on the previous models performance. 
 
-% TODO: Add graphic for Training
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/boosting_training}
+    \caption{Boosting training example}
+\end{figure}
 
 % Boosting prediction
 % TODO: let GPT check
