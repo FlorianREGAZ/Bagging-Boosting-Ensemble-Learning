@@ -178,9 +178,22 @@ and can help to build overall precise models. Nevertheless, you have to be aware
 of the challenges with Boosting e.g. noisy data.
 
 \subsection{Gradient Boosting}
-%\begin{itemize}
-%    \item difference to boosting
-%\end{itemize}
+Gradient Boosting \citep{breiman1997arcing, friedman2001greedy, friedman2002stochastic} 
+is an ensemble learning method based on Boosting. It is typically, but not solely used in 
+combination with Decision Trees. Also called Gradient-Boosted Trees.
+Each Decision Tree is fit on the residuals (difference between target and predicted
+value) of the previous Decision Tree. As a start, the residuals are calculated by
+subtracting the mean.
+For the prediction, the trained trees are combined by multiplying their prediction
+with the learning rate and adding them all together with the mean.
+In difference to regular Boosting, all trees have the same weight, resulting
+in an equal contribution to the final prediction.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.5\textwidth]{figures/gradient_boosting_prediction}
+    \caption{Gradient Boosting prediction example}
+\end{figure}
 
 % TODO: maybe add
 % \subsection{Extreme Gradient Boosting}
