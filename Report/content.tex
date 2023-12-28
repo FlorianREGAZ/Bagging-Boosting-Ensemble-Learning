@@ -114,7 +114,7 @@ a more resilient, robust, and generalized model.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
-Boosting Schapire is another ensemble learning method like bagging.
+Boosting \citep{Schapire1990} is another ensemble learning method like bagging.
 However, unlike bagging, boosting trains the models sequentially, where each
 model learns from the mistakes of its predecessors.
 In the first step, the data subset for the first model gets created and a model 
@@ -182,7 +182,32 @@ of the challenges with boosting e.g. noisy data.
 
 % ---------------------------------------------------------------------------- %
 \section{Examples}
+In the examples, we aim to compare various ensemble learning algorithms - Bagging, 
+Boosting (AdaBoost - \citet{freund1996experiments}), Random Forest, and Gradient 
+Boosting - against Decision Trees across different datasets.
+First, we're looking for the optimal depth of the Decision Tree which maximizes the 
+precision. This Decision Tree will be used as the base learning algorithm for 
+the ensemble learning algorithms.
+In order to determine the accuracy of the Decision Tree, the datasets are split
+into a validation set (20\%) and the rest (80\%). The rest is used for a 10-fold 
+cross-validation, where the accuracy is calculated by averaging the accuracy of 
+all folds.
+The same method is used to find the best hyperparameters for Bagging, Boosting, 
+Random Forest and Gradient Boosting. The learning rate is always 0.1 if 
+applicable.
+This approach allows us to comprehensively assess each algorithm's effectiveness
+and draw meaningful comparisons.
+
+
 \subsection{Example 1}
+In the first example we're using the Breast Cancer Wisconsin (Diagnostic)
+dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
+the University of Wisconsin Hospitals. It contains 30 features and has 569
+data points. The goal of the dataset is to classify if the breast cancer
+is benign or malignant.
+
+\input{tables/breast_cancer_wisconsin}
+
 \subsection{Example 2}
 
 % ---------------------------------------------------------------------------- %
