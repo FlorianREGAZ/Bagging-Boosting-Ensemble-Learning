@@ -37,7 +37,7 @@ So the goal of ensemble learning is to achieve a better predictive performance.
 Nevertheless, it comes at the cost of increased computational resources for 
 training as well as prediction and storage.
 
-Overall, there are many different ensemble methods, such as bagging and boosting, 
+Overall, there are many different ensemble methods, such as Bagging and Boosting, 
 which we will go into more detail in this report. However, there are many more 
 like stacking and blending.
 
@@ -45,7 +45,7 @@ like stacking and blending.
 \subsection{Bagging}
 
 % Intro Bagging and Traing
-Bootstrap Aggregating, commonly known as bagging, is an ensemble learning method
+Bootstrap Aggregating, commonly known as Bagging, is an ensemble learning method
 developed by \citet*{Breiman1996}. The models for the ensemble get trained individually
 by using the bootstrapping technique. Bootstrapping involves creating random
 subsets of the original training dataset. The subsets are created by drawing 
@@ -68,11 +68,11 @@ good at predicting blue, but not very accurate with orange.
 \end{figure}
 
 % Prediction Bagging
-In the bagging ensemble, each model makes its prediction independently. Because of
+In the Bagging ensemble, each model makes its prediction independently. Because of
 that the predictions of the individual models can be run in parallel, similar to
 the training. Once every model in the ensemble has made their prediction, they get
 aggregated to form a final ensemble prediction. The method of aggregation depends
-on the problem that is being solved by the bagging ensemble. 
+on the problem that is being solved by the Bagging ensemble. 
 For classification problems, a common method is majority voting. Each model votes 
 for a particular class. The class that receives the most votes is chosen for the
 final ensemble prediction.
@@ -93,33 +93,41 @@ that have high variance or tend to overfit quickly. By bootstrapping and
 averaging the predictions, the variance gets reduced and potential overfitting
 is avoided.
 The same goes for unstable learning algorithms, that produce significantly different
-results on small changes in the data. That's why bagging is often used with decision
-trees as they tend to be unstable and to have high variance.
-Additionally, bagging can be very helpful when dealing with noisy, imbalanced 
+results on small changes in the data. That's why Bagging is often used with Decision
+Trees as they tend to be unstable and to have high variance.
+Additionally, Bagging can be very helpful when dealing with noisy, imbalanced 
 datasets or datasets with missing data. The bootstrapping helps to create 
 diverse datasets with each class being adequately represented and also averaging
 out the noise in combination with aggregation.
 
 
 % Summary
-All in all, bagging can help to reduce variance, prevent overfitting, and to build
+All in all, Bagging can help to reduce variance, prevent overfitting, and to build
 a more resilient, robust, and generalized model.
 
 \subsection{Random Forest}
-%\begin{itemize}
-%    \item difference to bagging
-%\end{itemize}
+Random Forest is an ensemble learning method, like Bagging, also developed
+by \citet{breiman2001random}. The difference between Bagging and Random Forests
+lies in the training of the models within the ensemble. 
+First, the base learning algorithm is always a Decision Tree. 
+Second, Random Forests utilize a method called Feature Randomness. When 
+constructing each tree in a Random Forest, instead of considering all available
+features for splitting at each node, a random subset of features is selected.
+This randomness reduces the correlation between the individual trees, avoiding
+overfitting and increasing robustness and generalization.
 
-% TODO: adden wenn noch Platz - \subsection{Out-of-bag}
+
+% TODO: adden wenn noch Platz
+%\subsection{Out-of-bag}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
-Boosting \citep{Schapire1990} is another ensemble learning method like bagging.
-However, unlike bagging, boosting trains the models sequentially, where each
+Boosting \citep{Schapire1990} is another ensemble learning method like Bagging.
+However, unlike Bagging, Boosting trains the models sequentially, where each
 model learns from the mistakes of its predecessors.
 In the first step, the data subset for the first model gets created and a model 
 is trained on it. Initially, the dataset is equally weighted, similar to the initial
-setup in bagging: data points are drawn with replacement until the subset has the 
+setup in Bagging: data points are drawn with replacement until the subset has the 
 same size as the original dataset.
 In the second step, the performance of the model is evaluated. The weight gets
 increased for incorrectly predicted samples and decreased for correctly predicted
@@ -129,7 +137,7 @@ This weight adjustment makes the next model focus more on the data points that
 previous models predicted incorrectly.
 Steps two and three, the process of updating weights and training new models now gets 
 repeated until all models are trained.
-Different from bagging, boosting can't be trained in parallel, because each model
+Different from Bagging, Boosting can't be trained in parallel, because each model
 is trained based on the previous model's performance. 
 
 \begin{figure}[htbp]
@@ -139,9 +147,9 @@ is trained based on the previous model's performance.
 \end{figure}
 
 % Boosting prediction
-In contrast to the training, each model makes its individual prediction in boosting.
+In contrast to the training, each model makes its individual prediction in Boosting.
 This means the predictions can be done in parallel.
-Unlike bagging where each model's prediction is given equal weight, boosting uses
+Unlike Bagging where each model's prediction is given equal weight, Boosting uses
 a weighted average approach to combine the individual predictions. This means
 each model has its own weight based on the performance in the training phase.
 For classification problems, this means that the vote of each model can have
@@ -153,31 +161,29 @@ of the predictions from all models.
 Boosting is ideal to use when the base learning algorithm suffers from high bias.
 This is combated through the way the ensemble is trained, as each model focuses on the
 weaknesses of the previous one.
-Additionally, boosting is particularly effective with high-dimensional data, where
+Additionally, Boosting is particularly effective with high-dimensional data, where
 the number of features is large. Other models might not be able to capture the 
 complexity or more complex models might overfit.
-However, boosting can strike a balance by incrementally building complexity and 
+However, Boosting can strike a balance by incrementally building complexity and 
 focusing on features that improve the predictive performance.
-Furthermore, it's important to note that boosting works best on datasets with little 
+Furthermore, it's important to note that Boosting works best on datasets with little 
 to no outliers. The ensemble strongly focuses on correcting errors. Outliers can 
 disproportionately influence the direction of the learning process, leading
 to overfitting.
 
 
 % Boosting summary
-To put it in a nutshell, boosting can help to reduce bias, avoid underfitting,
+To put it in a nutshell, Boosting can help to reduce bias, avoid underfitting,
 and can help to build overall precise models. Nevertheless, you have to be aware
-of the challenges with boosting e.g. noisy data.
+of the challenges with Boosting e.g. noisy data.
 
 \subsection{Gradient Boosting}
 %\begin{itemize}
 %    \item difference to boosting
 %\end{itemize}
 
-\subsection{Extreme Gradient Boosting}
-%\begin{itemize}
-%    \item difference to gradient boosting
-%\end{itemize}
+% TODO: maybe add
+% \subsection{Extreme Gradient Boosting}
 
 
 % ---------------------------------------------------------------------------- %
@@ -205,7 +211,7 @@ dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
 the University of Wisconsin Hospitals. It contains 30 features and has 569
 data points. The goal of the dataset is to classify if breast cancer
 is benign or malignant.
-\newpage
+
 \input{tables/breast_cancer_wisconsin}
 
 
