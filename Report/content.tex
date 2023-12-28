@@ -237,10 +237,31 @@ disease.
 \input{tables/heart_disease_cleveland}
 
 % ---------------------------------------------------------------------------- %
+\newpage
 \section{Summary and conclusion}
-Mandatory. Short summary of the most important aspects of the report.
-If possible: What are open challenges?
+Ensemble Learning is a powerful approach in machine learning that combines 
+multiple models to produce a superior output compared to individual models.
+Within ensemble learning, two primary techniques are Bagging and Boosting, 
+each with its unique methodology and advantages.
 
-\begin{itemize}
-    \item Bagging vs. Boosting - whats the difference?
-\end{itemize}
+
+Bagging aims to reduce variance in predictions. In bagging, models are trained 
+independently in parallel, using different subsets of the training data.
+The final prediction is typically made by aggregating the outputs of all models,
+using methods like majority voting (classification) or averaging (regression).
+
+
+Boosting focuses on reducing bias. In this technique, models are trained sequentially,
+where each model attempts to correct the errors made by the previous one. Despite 
+the sequential training, predictions can be made in parallel. The final prediction
+is made similar to bagging. However the performance of each model in the training 
+step determines how strong the influence is on the final prediction.
+
+
+The evolution of these methods into more advanced versions like Random Forests
+and Gradient Boosting has further enhanced their capabilities. These advanced 
+techniques can outperform standard individual models and even the basic forms 
+of bagging and boosting. 
+
+% TODO: say when to pick which model. Example:
+% The choice between bagging and boosting (and their advanced versions) should be guided by the specific requirements of the problem at hand, considering factors like data size, feature relationships, and the inherent trade-offs between bias and variance.
