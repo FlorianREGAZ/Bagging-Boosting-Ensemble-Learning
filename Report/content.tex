@@ -237,6 +237,10 @@ This approach allows us to comprehensively assess each algorithm's effectiveness
 and draw meaningful comparisons.
 
 
+The experiments were implemented in Python 3.10.1, using scikit-learn 1.3.2, and
+conducted on a system equipped with an AMD Ryzen 5 5600X CPU (3.7 GHz, 6 cores).
+
+\newpage % TODO: remove
 \subsection{Example 1}
 In the first example we are using the Breast Cancer Wisconsin (Diagnostic)
 dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
@@ -248,14 +252,30 @@ is benign or malignant (classification).
 
 \begin{figure}[htbp]
     \centering
+    \label{fig:bcw_comparison}
     \makebox[\textwidth]{\includegraphics[width=1.25\textwidth]{figures/examples/bcw_comparison}}
     \caption{
-        Accuracy comparison between the ensemble learning algorithms.
+        Accuracy comparison between the ensemble learning algorithms on the Breast Cancer 
+        Wisconsin (Diagnostic) dataset.
         The x-axis shows the amount of estimators and the y-axis the subset accuracy.
     }
 \end{figure}
 
+In the first example, all evaluated ensemble learning methods surpassed the decision tree in performance.
+Notably, Bagging and Random forest, as well as AdaBoost and Gradient boosting achieved identical accuracies
+on the validation set. However, AdaBoost and Gradient boosting performed better on the validation set than
+the Bagging and Random forest ensemble.
+Overall, Gradient boosting performed best when also looking at the accuracy on the folds. Nevertheless,
+it also has the longest training time, and highest estimator count, which may be a trade-off to 
+consider depending on the application.
+Also \hyperref[fig:bcw_comparison]{figure 5} shows that the performance of the ensemble learning 
+methods mostly improve within the first 50 estimators, then it only changes slightly until around 220 estimators.
+After 220 estimators it nearly stagnates.
+Furthermore, as illustrated in \hyperref[fig:bcw_comparison]{Figure 5}, the performance gains of the ensemble
+learning methods are most pronounced within the first 50 estimators and tend to plateau beyond 220 estimators.
+This indicates diminishing returns with the addition of further estimators.
 
+\newpage % TODO: remove
 \subsection{Example 2}
 In the second example we are using the Heart Disease Cleveland dataset by
 \citet*{heart_disease_cleveland}. It contains 13 features and has 303 data 
@@ -263,6 +283,34 @@ points. The goal of the dataset is to determine if a patient has a heart
 disease (classification).
 
 \input{tables/heart_disease_cleveland}
+
+\begin{figure}[htbp]
+    \centering
+    \label{fig:hdc_comparison}
+    \makebox[\textwidth]{\includegraphics[width=1.25\textwidth]{figures/examples/hdc_comparison}}
+    \caption{
+        Accuracy comparison between the ensemble learning algorithms on the Heart Disease Cleveland dataset.
+        The x-axis shows the amount of estimators and the y-axis the subset accuracy.
+    }
+\end{figure}
+
+% - Every ensemble performed significantly better than the decision tree from 5% up to 13%
+% - bagging and random forest had the same amount of estimators where they performed best, however random forest outperformed bagging with being nearly 4% more accurate
+% - overall adaboost had the highest accuracy on the validation set, eventhough it performed worst on the folds on average. Also adaboost had the least estimators and still performed best.
+% - overall figure 6 shows that the performance relative to the estimator count is much more volatile than in example 1. However which stays the same is that most improvements are made within the first 50 estimators. Additionally whats interesting to see is that accuracy of adaboosting is going down with more estimators as it is overfitting the training data.    
+In the second example, all evaluated ensemble learning methods surpassed the decision tree in performance.
+There were significant performance enhancements, ranging from 5\% up to 13\%.
+Additionally, \hyperref[tab:hdc_table]{Table 2} shows that that random forest notably surpassed Bagging by
+nearly 4\% in accuracy, eventhough they have the same estimator count.
+Despite having the worst results on the folds, AdaBoost stood out with the highest accuracy on the validation set.
+This is particularly noteworthy considering that AdaBoost utilized the fewest estimators of all methods examined,
+yet managed to achieve the best performance.
+The results depicted in \hyperref[fig:hdc_comparison]{Figure 6} reveal a more volatile relationship between
+performance and estimator count compared to the first example. Consistent with the previous findings, the most
+substantial performance improvements occurred within the initial 50 estimators.
+A notable point of interest is the declining accuracy of AdaBoost as the number of estimators increase, suggesting
+a tendency for the model to overfit the training data.
+This underscores that more estimators can also have a negative effect on the generalizability of the model. 
 
 \subsection{Example 3}
 In the third example we are using the day version of the Bike Sharing dataset by
