@@ -9,7 +9,7 @@ mapping = [index for index in range(1, 501)]
 
 
 plt.figure(figsize=(15, 6))
-plt.title("Breast Cancer Wisconsin: Ensemble learning comparison")
+#plt.title("Breast Cancer Wisconsin: Ensemble learning comparison")
 plt.plot(mapping, adaboost, label='AdaBoost')
 plt.plot(mapping, gradient_boosting, label='Gradient Boosting')
 plt.plot(mapping, bagging, label='Bagging')

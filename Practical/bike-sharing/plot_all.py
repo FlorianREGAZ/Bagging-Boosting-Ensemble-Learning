@@ -10,7 +10,7 @@ random_forest = [0.783, 0.834, 0.841, 0.858, 0.861, 0.869, 0.864, 0.86, 0.866, 0
 mapping = [index for index in range(1, 501)]
 
 plt.figure(figsize=(15, 6))
-plt.title("Bike sharing: Ensemble learning comparison")
+#plt.title("Bike sharing: Ensemble learning comparison")
 plt.plot(mapping, adaboost, label='AdaBoost')
 plt.plot(mapping, gradient_boosting, label='Gradient Boosting')
 plt.plot(mapping, bagging, label='Bagging')
@@ -18,5 +18,5 @@ plt.plot(mapping, random_forest, label='Random Forest')
 
 plt.legend()
 
-plt.savefig("figs/bcw_comparison.png")
+plt.savefig("figs/bs_comparison.png")
 plt.show()

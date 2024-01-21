@@ -219,16 +219,20 @@ Boosting - against Decision Trees across different datasets.
 First, we are looking for the optimal depth of the Decision Tree which maximizes the 
 precision. This Decision Tree will be used as the base learning algorithm for 
 the ensemble learning algorithms.
-In order to determine the best hyperparameters of the Decision Tree, the datasets are 
-split into a validation set (20\%) and the rest (80\%). The rest is used for a 10-fold 
-cross-validation, where the overall accuracy is calculated by averaging the accuracy
-of all folds. With the 10-fold cross-validation of the rest, we are searching for the
-best hyperparameters, by randomly picking them at first and changing them into the
-direction, where the accuracy improves.
-The same method is used to find the best hyperparameters for Bagging, Boosting, 
-Random Forest and Gradient Boosting. The learning rate is always 0.1 if 
-applicable. Afterwards, the Decision Tree and the ensemble learning algorithms are
-tested on the validation set.
+In order to determine the best maximum depth of the Decision Tree, the datasets are 
+split into a validation set (20\%) and a training set (80\%). The training set is used
+for a 10-fold cross-validation, where the overall accuracy is calculated by averaging the 
+accuracy of all folds. With the 10-fold cross-validation of the training set, we are
+searching for the best maxmimum depth, trying all of them from 1 to 30. We stopped at
+30 as the accuracy declined or stagnated for all examples. The Decision tree with the
+best accuracy is then used as the base learning algorithm for the ensembles.
+
+
+The same method is used to find the best estimator count for Bagging, Boosting, 
+Random Forest and Gradient Boosting. However, in contrast to the Decision tree,
+we are trying all estimator counts from 1 to 500.
+The learning rate is always 0.1 if applicable. Afterwards, the Decision Tree and
+the ensemble learning algorithms are tested on the validation set.
 This approach allows us to comprehensively assess each algorithm's effectiveness
 and draw meaningful comparisons.
 
@@ -238,22 +242,38 @@ In the first example we are using the Breast Cancer Wisconsin (Diagnostic)
 dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
 the University of Wisconsin Hospitals. It contains 30 features and has 569
 data points. The goal of the dataset is to classify if breast cancer
-is benign or malignant.
+is benign or malignant (classification).
 
 \input{tables/breast_cancer_wisconsin}
-% TODO: maybe add conclusion for the example
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[\textwidth]{\includegraphics[width=1.25\textwidth]{figures/examples/bcw_comparison}}
+    \caption{
+        Accuracy comparison between the ensemble learning algorithms.
+        The x-axis shows the amount of estimators and the y-axis the subset accuracy.
+    }
+\end{figure}
 
 
 \subsection{Example 2}
 In the second example we are using the Heart Disease Cleveland dataset by
 \citet*{heart_disease_cleveland}. It contains 13 features and has 303 data 
 points. The goal of the dataset is to determine if a patient has a heart
-disease.
+disease (classification).
 
 \input{tables/heart_disease_cleveland}
-% TODO: maybe add conclusion for the example
 
-% TODO: maybe add a third example with regression
+\subsection{Example 3}
+In the third example we are using the day version of the Bike Sharing dataset by
+\citet*{bike_sharing}. It contains 13 features and has 731 data 
+points. The goal of the dataset is to determine the amount of bikes that are going
+to be rented out on the given day (regression).
+
+\input{tables/bike-sharing}
+
+
+% TODO: add general conclusion of the examples and what was seen and what was expected to be seen
 
 % ---------------------------------------------------------------------------- %
 \section{Summary and conclusion}

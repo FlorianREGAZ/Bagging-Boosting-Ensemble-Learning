@@ -9,7 +9,7 @@ mapping = [index for index in range(1, 501)]
 
 
 plt.figure(figsize=(15, 6))
-plt.title("Heart Disease Cleveland: Ensemble learning comparison")
+#plt.title("Heart Disease Cleveland: Ensemble learning comparison")
 plt.plot(mapping, adaboost, label='AdaBoost')
 plt.plot(mapping, gradient_boosting, label='Gradient Boosting')
 plt.plot(mapping, bagging, label='Bagging')
@@ -17,5 +17,5 @@ plt.plot(mapping, random_forest, label='Random Forest')
 
 plt.legend()
 
-plt.savefig("figs/bcw_comparison.png")
+plt.savefig("figs/hdc_comparison.png")
 plt.show()
