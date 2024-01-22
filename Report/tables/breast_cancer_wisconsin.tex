@@ -1,15 +1,25 @@
 \begin{table}[htbp]
     \centering
-    \begin{tabular}{l c c c c}
+    \begin{tabular}{l c c c c c}
     \toprule
-    Learning algorithm  & Worst fold     & Best fold     & Average fold  & Validation    \\
+    Criteria        & DT    & Bag       & RF    & Ada   & GB \\
     \midrule
-    Decision Tree       &  0.85          & 0.98          & 0.93          & 0.93          \\
-    Bagging             &  0.84          & \textbf{1.00} & 0.93          & 0.96          \\
-    Random Forest       &  0.85          & \textbf{1.00} & \textbf{0.95} & 0.97          \\
-    Boosting            &  0.87          & \textbf{1.00} & \textbf{0.95} & \textbf{0.99} \\
-    Gradient Boosting   &  \textbf{0.89} & \textbf{1.00} & 0.94          & \textbf{0.99} \\
+    Worst fold      & 0.822 & 0.869     & 0.889 & 0.891 & 0.933\\
+    Best fold       & 0.978 & 1.000     & 1.000 & 1.000 & 1.000\\
+    Average fold    & 0.927 & 0.945     & 0.956 & 0.956 & 0.963\\
+    Validation      & 0.965 & 0.974     & 0.974 & 0.991 & 0.991\\
+    Training time   & 0.1s  & 2.9s      & 0.3s  & 2.5s  & 11.7s\\
+    Estimator count & -     & 61        & 21    & 33    & 174 \\
     \bottomrule
     \end{tabular}
-    \caption{Breast Cancer Wisconsin (Diagnostic) model accuracy}
+    \caption{
+        Subset accuracy on the Breast Cancer Wisconsin (Diagnostic) dataset using 
+        (1) a decision tree (DT) classifier;
+        (2) a Bagging (Bag) classifier;
+        (3) a Random forest (RF) classifier; 
+        (4) a AdaBoost (Ada) classifier; 
+        (5) a Gradient boosting (GB) classifier.
+        All ensembles use a decision tree with maximum depth of four as 
+        the base learning algorithm.
+    }
 \end{table}

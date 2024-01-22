@@ -1,15 +1,26 @@
 \begin{table}[htbp]
     \centering
-    \begin{tabular}{l c c c c}
+    \label{tab:hdc_table}
+    \begin{tabular}{l c c c c c}
     \toprule
-    Learning algorithm  & Worst fold     & Best fold     & Average fold  & Validation    \\
+    Criteria        & DT    & Bag       & RF    & Ada   & GB \\
     \midrule
-    Decision Tree       &  0.60          & \textbf{0.92} & 0.81          & 0.77          \\
-    Bagging             &  0.72          & 0.88          & 0.81          & 0.82          \\
-    Random Forest       &  \textbf{0.75} & 0.88          & \textbf{0.82} & \textbf{0.85} \\
-    Boosting            &  0.63          & 0.88          & 0.77          & 0.84          \\
-    Gradient Boosting   &  0.60          & 0.88          & 0.79          & 0.80          \\
+    Worst fold      & 0.600 & 0.720     & 0.720 & 0.667 & 0.640\\
+    Best fold       & 0.917 & 0.875     & 0.917 & 0.833 & 0.875\\
+    Average fold    & 0.815 & 0.823     & 0.815 & 0.761 & 0.778\\
+    Validation      & 0.770 & 0.820     & 0.869 & 0.902 & 0.869\\
+    Training time   & 0.1s  & 0.6s      & 0.3s  & 0.2s  & 1.1s\\
+    Estimator count & -     & 48        & 48    & 15    & 160\\
     \bottomrule
     \end{tabular}
-    \caption{Heart Disease Cleveland model accuracy}
+    \caption{
+        Subset accuracy on the Heart Disease Cleveland dataset using 
+        (1) a decision tree (DT) classifier;
+        (2) a Bagging (Bag) classifier;
+        (3) a Random forest (RF) classifier; 
+        (4) a AdaBoost (Ada) classifier; 
+        (5) a Gradient boosting (GB) classifier.
+        All ensembles use a decision tree with maximum depth of three as 
+        the base learning algorithm.
+    }
 \end{table}

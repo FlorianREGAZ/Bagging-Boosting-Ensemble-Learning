@@ -75,7 +75,7 @@ good at predicting blue, but not very accurate with orange.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/bootstrapping}
+    \includegraphics[width=.6\textwidth]{figures/bootstrapping}
     \caption{Creating subsets with bootstrapping.}
 \end{figure}
 
@@ -93,7 +93,7 @@ averaged.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/bagging_prediction}
+    \includegraphics[width=.65\textwidth]{figures/bagging_prediction}
     \caption{Bagging prediction example}
 \end{figure}
 
@@ -154,7 +154,7 @@ is trained based on the previous model's performance.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/boosting_training}
+    \includegraphics[width=.7\textwidth]{figures/boosting_training}
     \caption{Boosting training example}
 \end{figure}
 
@@ -203,7 +203,7 @@ in an equal contribution to the final prediction.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=.5\textwidth]{figures/gradient_boosting_prediction}
+    \includegraphics[width=.8\textwidth]{figures/gradient_boosting_prediction}
     \caption{Gradient Boosting prediction example}
 \end{figure}
 
@@ -219,41 +219,131 @@ Boosting - against Decision Trees across different datasets.
 First, we are looking for the optimal depth of the Decision Tree which maximizes the 
 precision. This Decision Tree will be used as the base learning algorithm for 
 the ensemble learning algorithms.
-In order to determine the best hyperparameters of the Decision Tree, the datasets are 
-split into a validation set (20\%) and the rest (80\%). The rest is used for a 10-fold 
-cross-validation, where the overall accuracy is calculated by averaging the accuracy
-of all folds. With the 10-fold cross-validation of the rest, we are searching for the
-best hyperparameters, by randomly picking them at first and changing them into the
-direction, where the accuracy improves.
-The same method is used to find the best hyperparameters for Bagging, Boosting, 
-Random Forest and Gradient Boosting. The learning rate is always 0.1 if 
-applicable. Afterwards, the Decision Tree and the ensemble learning algorithms are
-tested on the validation set.
+In order to determine the best maximum depth of the Decision Tree, the datasets are 
+split into a validation set (20\%) and a training set (80\%). The training set is used
+for a 10-fold cross-validation, where the overall accuracy is calculated by averaging the 
+accuracy of all folds. With the 10-fold cross-validation of the training set, we are
+searching for the best maxmimum depth, trying all of them from 1 to 30. We stopped at
+30 as the accuracy declined or stagnated for all examples. The Decision tree with the
+best accuracy is then used as the base learning algorithm for the ensembles.
+
+
+The same method is used to find the best estimator count for Bagging, Boosting, 
+Random Forest and Gradient Boosting. However, in contrast to the Decision tree,
+we are trying all estimator counts from 1 to 500.
+The learning rate is always 0.1 if applicable. Afterwards, the Decision Tree and
+the ensemble learning algorithms are tested on the validation set.
 This approach allows us to comprehensively assess each algorithm's effectiveness
 and draw meaningful comparisons.
 
 
+The experiments were implemented in Python 3.10.1, using scikit-learn 1.3.2, and
+conducted on a system equipped with an AMD Ryzen 5 5600X CPU (3.7 GHz, 6 cores).
+
+\newpage % TODO: remove
 \subsection{Example 1}
 In the first example we are using the Breast Cancer Wisconsin (Diagnostic)
 dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
 the University of Wisconsin Hospitals. It contains 30 features and has 569
 data points. The goal of the dataset is to classify if breast cancer
-is benign or malignant.
+is benign or malignant (classification).
 
 \input{tables/breast_cancer_wisconsin}
-% TODO: maybe add conclusion for the example
 
+\begin{figure}[htbp]
+    \centering
+    \label{fig:bcw_comparison}
+    \makebox[\textwidth]{\includegraphics[width=1.23\textwidth]{figures/examples/bcw_comparison}}
+    \caption{
+        Accuracy comparison between the ensemble learning algorithms on the Breast Cancer 
+        Wisconsin (Diagnostic) dataset.
+        The x-axis shows the amount of estimators and the y-axis the subset accuracy.
+    }
+\end{figure}
 
+In the first example, all evaluated ensemble learning methods surpassed the decision tree in performance.
+Notably, Bagging and Random forest, as well as AdaBoost and Gradient boosting achieved identical accuracies
+on the validation set. However, AdaBoost and Gradient boosting performed better on the validation set than
+the Bagging and Random forest ensemble.
+Overall, Gradient boosting performed best when also looking at the accuracy on the folds. Nevertheless,
+it also has the longest training time, and highest estimator count, which may be a trade-off to 
+consider depending on the application.
+Also \hyperref[fig:bcw_comparison]{figure 5} shows that the performance of the ensemble learning 
+methods mostly improve within the first 50 estimators, then it only changes slightly until around 220 estimators.
+After 220 estimators it nearly stagnates.
+Furthermore, as illustrated in \hyperref[fig:bcw_comparison]{Figure 5}, the performance gains of the ensemble
+learning methods are most pronounced within the first 50 estimators and tend to plateau beyond 220 estimators.
+This indicates diminishing returns with the addition of further estimators.
+
+\newpage % TODO: remove
 \subsection{Example 2}
 In the second example we are using the Heart Disease Cleveland dataset by
 \citet*{heart_disease_cleveland}. It contains 13 features and has 303 data 
 points. The goal of the dataset is to determine if a patient has a heart
-disease.
+disease (classification).
 
 \input{tables/heart_disease_cleveland}
-% TODO: maybe add conclusion for the example
 
-% TODO: maybe add a third example with regression
+\begin{figure}[htbp]
+    \centering
+    \label{fig:hdc_comparison}
+    \makebox[\textwidth]{\includegraphics[width=1.23\textwidth]{figures/examples/hdc_comparison}}
+    \caption{
+        Accuracy comparison between the ensemble learning algorithms on the Heart Disease Cleveland dataset.
+        The x-axis shows the amount of estimators and the y-axis the subset accuracy.
+    }
+\end{figure}
+
+In the second example, all evaluated ensemble learning methods surpassed the decision tree in performance.
+There were significant performance enhancements, ranging from 5\% up to 13\%.
+Additionally, \hyperref[tab:hdc_table]{Table 2} shows that that random forest notably surpassed Bagging by
+nearly 4\% in accuracy, eventhough they have the same estimator count.
+Despite having the worst results on the folds, AdaBoost stood out with the highest accuracy on the validation set.
+This is particularly noteworthy considering that AdaBoost utilized the fewest estimators of all methods examined,
+yet managed to achieve the best performance.
+The results depicted in \hyperref[fig:hdc_comparison]{Figure 6} reveal a more volatile relationship between
+performance and estimator count compared to the first example. Consistent with the previous findings, the most
+substantial performance improvements occurred within the initial 50 estimators.
+A notable point of interest is the declining accuracy of AdaBoost as the number of estimators increase, suggesting
+a tendency for the model to overfit the training data.
+This underscores that more estimators can also have a negative effect on the generalizability of the model. 
+
+\newpage % TODO: remove
+\subsection{Example 3}
+In the third example we are using the day version of the Bike Sharing dataset by
+\citet*{bike_sharing}. It contains 13 features and has 731 data 
+points. The goal of the dataset is to determine the amount of bikes that are going
+to be rented out on the given day (regression).
+
+\input{tables/bike-sharing}
+
+\begin{figure}[htbp]
+    \centering
+    \label{fig:bs_comparison}
+    \makebox[\textwidth]{\includegraphics[width=1.23\textwidth]{figures/examples/bs_comparison}}
+    \caption{
+        Accuracy comparison between the ensemble learning algorithms on the Bike Sharing dataset.
+        The x-axis shows the amount of estimators and the y-axis the coefficient of determination $R^2$.
+    }
+\end{figure}
+
+In the third example, all ensemble methods evaluated surpassed the decision tree, each achieving roughly an 8\% improvement in accuracy.
+The performance of the ensemble learning methods were closely matched, with a maximum variation of 0.7\%.
+Similar to the previous results, Bagging and Random forest shared an identical number of estimators. However, this time the 
+accuracy is very similar, with Random forest having a slightly higher accuracy.
+In contrast to the previous examples, AdaBoost ranked lowest in terms of performance. Notably, it displayed a persistent
+improvement, achieving its peak accuracy with 498 estimators. This suggests a potential for further incremental gains if allowed
+additional computational resources.
+Gradient Boosting, outperformed all other ensemble learning methods with a 0.1\% higher accuracy on the validation set than Random
+Forest.
+\hyperref[fig:bs_comparison]{Figure 7} reinforces a consistent observation: the majority of performance improvements are realized
+within the initial 50 estimators, beyond which there is a general tendency to plateau.
+However, AdaBoost stands as the exception to this rule, defying the common trend of stagnation observed in other methods.
+
+
+% TODO: add general conclusion of the examples
+% - talk about results of the examples
+% - talk about what results were expected and what the examples didn't show but is also important to know
 
 % ---------------------------------------------------------------------------- %
 \section{Summary and conclusion}
