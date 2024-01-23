@@ -15,6 +15,10 @@ plt.plot(mapping, gradient_boosting, label='Gradient Boosting')
 plt.plot(mapping, bagging, label='Bagging')
 plt.plot(mapping, random_forest, label='Random Forest')
 
+
+plt.xscale('log')
+plt.xticks(ticks=[1, 10, 100, 500], labels=[1, 10, 100, 500])
+
 plt.legend()
 
 plt.savefig("figs/bcw_comparison.png")
