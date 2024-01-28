@@ -123,15 +123,33 @@ Random Forest is an ensemble learning method, like Bagging, also developed
 by \citet{breiman2001random}. The difference between Bagging and Random Forests
 lies in the training of the models within the ensemble. 
 First, the base learning algorithm is always a Decision Tree. 
-Second, Random Forests utilize a method called Feature Randomness. When 
-constructing each tree in a Random Forest, instead of considering all available
-features for splitting at each node, a random subset of features is selected.
+Second, Random Forests utilize a method called feature randomness. When building
+each tree within a Random Forest, a random subset of features is chosen for consideration
+at each node, rather than using all available features for the splits.
+Because of that, Random Forest typically requires to use more models within the ensemble
+than Bagging.
 This randomness reduces the correlation between the individual trees, avoiding
-overfitting and increasing robustness and generalization.
+overfitting and increasing robustness and generalization. This often results in
+Random Forests being more accurate than Bagging.
 
+\subsection{Out-of-bag}
 
-% TODO: adden wenn noch Platz
-%\subsection{Out-of-bag}
+Out-of-bag (OOB) is an useful concept for Bagging and Random Forest. It provides a way to
+measure the performance of the model without needing a separate validation set. 
+Because of the way Bagging and Random Forest are trained, the Decision Trees are on average
+only trained on around 67\% of the data, and they don't see around 33\%. 
+Therefore we can evaluate the ensemble on the training set. For each data point, we only use
+the Decision Trees that did not see the examples during the training step. By averaging the
+performance of that step, we receive an out-of-bag error.
+The OOB error can then be used to tune the hyperparameters of the model. Out-of-bag is particularly
+useful for small datasets, as it allows the use of the entire dataset for training while still
+providing an unbiased estimate of model performance.
+While OOB error is a useful tool for model assessment, it may not always perfectly align with the
+error estimated on an independent validation set.
+
+% Describe example image
+
+% TODO: add image
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
