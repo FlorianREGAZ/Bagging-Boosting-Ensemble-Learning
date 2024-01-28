@@ -1,18 +1,21 @@
 \section{Introduction}
 Machine learning is becoming increasingly pivotal in a variety of critical
 applications. Its usage extends to healthcare tasks such as detecting cancer
-and predicting diabetes outbreaks, underscoring its importance in public
-health and safety. Additionally, machine learning plays a significant role
-in environmental sustainability, for example in forecasting energy usage,
+\citep*{breast_cancer_prognosis} and predicting diabetes outbreaks
+\citep*{diabetes_classification}, underscoring its importance in public health and safety. 
+Additionally, machine learning plays a significant role in environmental sustainability,
+for example in forecasting energy usage \citep*{energy_forecasting},
 which is essential for efficient resource management. Beyond these critical
 areas, it also enhances everyday technology experiences, like search engine page 
-rankings, demonstrating its broad impact across diverse aspects of daily life.
+rankings \citep*{page_ranking}, demonstrating its broad impact across diverse aspects of daily life.
 
 Therefore it is essential to be able to train accurate and robust models. With
-Ensemble Learning methods such as Bagging or Boosting it is possible to reduce the 
-bias, variance and to create more resilient, robust, and generalized models. 
-Thereby improving the overall accuracy and outperforming individual learning 
-algorithms.
+Ensemble Learning methods such as Bagging \citep*{Breiman1996},
+Boosting \citep*{Schapire1990}, Random Forest \citep*{breiman2001random},
+and Gradient Boosting \citep*{breiman1997arcing, friedman2001greedy, friedman2002stochastic}
+it is possible to reduce the bias, variance and to create more resilient, robust,
+and generalized models. Thereby improving the overall accuracy and outperforming
+individual learning algorithms.
 Furthermore, Ensemble Learning methods are able to manage complex datasets
 characterized by noise, imbalance, and high dimensionality, as well as effectively
 hanlding missing data.
@@ -50,9 +53,7 @@ Nevertheless, it comes at the cost of increased computational resources for
 training as well as prediction and storage.
 
 Overall, there are many different ensemble methods, such as Bagging and Boosting, 
-which we will go into more detail in this report. However, there are many more 
-like stacking and blending.
-% TODO: maybe remove or reforulate the last sentence -> that there are many other Ensemble learning techniques
+which we will go into more detail in this report.
 % ---------------------------------------------------------------------------- %
 \subsection{Bagging}
 
