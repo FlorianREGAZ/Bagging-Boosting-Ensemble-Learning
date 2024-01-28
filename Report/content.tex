@@ -68,13 +68,14 @@ that some data points might not be in the subset. The models can be trained in
 parallel, because of the individually created subsets.
 
 
-Figure 1 shows how bootstrapping might work on an imaginary dataset. In subset 1
+\hyperref[fig:bootstrapping]{Figure 1} shows how bootstrapping might work on an imaginary dataset. In subset 1
 each class is equally distributed. Subset 2 has a focus on the red and orange bubbles.
 The subset N has a strong focus on blue, however it doesn't even have a single 
 orange bubble. This will probably mean that the model trained on subset N will be very
 good at predicting blue, but not very accurate with orange.
 
 \begin{figure}[htbp]
+    \label{fig:bootstrapping}
     \centering
     \includegraphics[width=.6\textwidth]{figures/bootstrapping}
     \caption{Creating subsets with bootstrapping.}
@@ -147,9 +148,17 @@ providing an unbiased estimate of model performance.
 While OOB error is a useful tool for model assessment, it may not always perfectly align with the
 error estimated on an independent validation set.
 
-% Describe example image
+\hyperref[fig:oob]{Figure 3} shows how out-of-bag might work on an imaginary dataset.
+The first subset doesn't contain the data points 2, 5, and 6. Therfore the Decision
+Tree that is trained on the first subset will be able to use those data points for testing.
+This works exactly the same for all other subsets.
 
-% TODO: add image
+\begin{figure}[htbp]
+    \label{fig:oob}
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/out_of_bag}
+    \caption{Out-of-bag example}
+\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
@@ -287,7 +296,7 @@ the Bagging and Random forest ensemble.
 Overall, Gradient boosting performed best when also looking at the accuracy on the folds. Nevertheless,
 it also has the longest training time, and highest estimator count, which may be a trade-off to 
 consider depending on the application.
-Also \hyperref[fig:bcw_comparison]{figure 5} shows that the performance of the ensemble learning 
+Also \hyperref[fig:bcw_comparison]{Figure 5} shows that the performance of the ensemble learning 
 methods mostly improve within the first 50 estimators, then it only changes slightly until around 220 estimators.
 After 220 estimators it nearly stagnates.
 Furthermore, as illustrated in \hyperref[fig:bcw_comparison]{Figure 5}, the performance gains of the ensemble
