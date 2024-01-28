@@ -134,10 +134,10 @@ Random Forests being more accurate than Bagging.
 
 \subsection{Out-of-bag}
 
-Out-of-bag (OOB) is an useful concept for Bagging and Random Forest. It provides a way to
-measure the performance of the model without needing a separate validation set. 
+Out-of-bag (OOB) by \citet{breiman1996out} is an useful concept for Bagging and Random Forest. 
+It provides a way to measure the performance of the model without needing a separate validation set. 
 Because of the way Bagging and Random Forest are trained, the Decision Trees are on average
-only trained on around 67\% of the data, and they don't see around 33\%. 
+only trained on around 63\% of the data, and they don't see around 37\%. 
 Therefore we can evaluate the ensemble on the training set. For each data point, we only use
 the Decision Trees that did not see the examples during the training step. By averaging the
 performance of that step, we receive an out-of-bag error.
