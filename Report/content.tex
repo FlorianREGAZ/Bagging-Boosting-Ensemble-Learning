@@ -1,18 +1,21 @@
 \section{Introduction}
 Machine learning is becoming increasingly pivotal in a variety of critical
 applications. Its usage extends to healthcare tasks such as detecting cancer
-and predicting diabetes outbreaks, underscoring its importance in public
-health and safety. Additionally, machine learning plays a significant role
-in environmental sustainability, for example in forecasting energy usage,
+\citep*{breast_cancer_prognosis} and predicting diabetes outbreaks
+\citep*{diabetes_classification}, underscoring its importance in public health and safety. 
+Additionally, machine learning plays a significant role in environmental sustainability,
+for example in forecasting energy usage \citep*{energy_forecasting},
 which is essential for efficient resource management. Beyond these critical
 areas, it also enhances everyday technology experiences, like search engine page 
-rankings, demonstrating its broad impact across diverse aspects of daily life.
+rankings \citep*{page_ranking}, demonstrating its broad impact across diverse aspects of daily life.
 
 Therefore it is essential to be able to train accurate and robust models. With
-Ensemble Learning methods such as Bagging or Boosting it is possible to reduce the 
-bias, variance and to create more resilient, robust, and generalized models. 
-Thereby improving the overall accuracy and outperforming individual learning 
-algorithms.
+Ensemble Learning methods such as Bagging \citep*{Breiman1996},
+Boosting \citep*{Schapire1990}, Random Forest \citep*{breiman2001random},
+and Gradient Boosting \citep*{breiman1997arcing, friedman2001greedy, friedman2002stochastic}
+it is possible to reduce the bias, variance and to create more resilient, robust,
+and generalized models. Thereby improving the overall accuracy and outperforming
+individual learning algorithms.
 Furthermore, Ensemble Learning methods are able to manage complex datasets
 characterized by noise, imbalance, and high dimensionality, as well as effectively
 hanlding missing data.
@@ -50,9 +53,7 @@ Nevertheless, it comes at the cost of increased computational resources for
 training as well as prediction and storage.
 
 Overall, there are many different ensemble methods, such as Bagging and Boosting, 
-which we will go into more detail in this report. However, there are many more 
-like stacking and blending.
-% TODO: maybe remove or reforulate the last sentence -> that there are many other Ensemble learning techniques
+which we will go into more detail in this report.
 % ---------------------------------------------------------------------------- %
 \subsection{Bagging}
 
@@ -122,15 +123,33 @@ Random Forest is an ensemble learning method, like Bagging, also developed
 by \citet{breiman2001random}. The difference between Bagging and Random Forests
 lies in the training of the models within the ensemble. 
 First, the base learning algorithm is always a Decision Tree. 
-Second, Random Forests utilize a method called Feature Randomness. When 
-constructing each tree in a Random Forest, instead of considering all available
-features for splitting at each node, a random subset of features is selected.
+Second, Random Forests utilize a method called feature randomness. When building
+each tree within a Random Forest, a random subset of features is chosen for consideration
+at each node, rather than using all available features for the splits.
+Because of that, Random Forest typically requires to use more models within the ensemble
+than Bagging.
 This randomness reduces the correlation between the individual trees, avoiding
-overfitting and increasing robustness and generalization.
+overfitting and increasing robustness and generalization. This often results in
+Random Forests being more accurate than Bagging.
 
+\subsection{Out-of-bag}
 
-% TODO: adden wenn noch Platz
-%\subsection{Out-of-bag}
+Out-of-bag (OOB) is an useful concept for Bagging and Random Forest. It provides a way to
+measure the performance of the model without needing a separate validation set. 
+Because of the way Bagging and Random Forest are trained, the Decision Trees are on average
+only trained on around 67\% of the data, and they don't see around 33\%. 
+Therefore we can evaluate the ensemble on the training set. For each data point, we only use
+the Decision Trees that did not see the examples during the training step. By averaging the
+performance of that step, we receive an out-of-bag error.
+The OOB error can then be used to tune the hyperparameters of the model. Out-of-bag is particularly
+useful for small datasets, as it allows the use of the entire dataset for training while still
+providing an unbiased estimate of model performance.
+While OOB error is a useful tool for model assessment, it may not always perfectly align with the
+error estimated on an independent validation set.
+
+% Describe example image
+
+% TODO: add image
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
