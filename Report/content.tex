@@ -162,6 +162,7 @@ This works exactly the same for all other subsets.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
+% TODO: mention that boosting is typically using stumpts with Decision trees
 Boosting \citep{Schapire1990} is another ensemble learning method like Bagging.
 However, unlike Bagging, Boosting trains the models sequentially, where each
 model learns from the mistakes of its predecessors.
@@ -219,26 +220,50 @@ of the challenges with Boosting e.g. noisy data.
 
 \subsection{Gradient Boosting}
 Gradient Boosting \citep{breiman1997arcing, friedman2001greedy, friedman2002stochastic} 
-is an ensemble learning method based on Boosting. It is typically, but not solely used in 
+is an ensemble learning method similar to Boosting. It is typically, but not solely used in 
 combination with Decision Trees. Also called Gradient-Boosted Trees.
-Each Decision Tree is fit on the residuals (difference between target and predicted
-value) of the previous Decision Tree. As a start, the residuals are calculated by
-subtracting the mean.
-For the prediction, the trained trees are combined by multiplying their prediction
-with the learning rate and adding them all together with the mean.
-In difference to regular Boosting, all trees have the same weight, resulting
-in an equal contribution to the final prediction.
+
+For regression tasks, Gradient Boosting starts with making a naive prediction on the target,
+by using the mean of the target derived from the training data as the inital prediciton.
+To achieve better accuracy, the Gradient Boosting algorithm places its focus on the
+residuals (difference between target and predicted value). The primary objective is to minimize
+them systematically.
+In order to do that, it builds a Decision Tree, that tries to predict the calculated residuals.
+Unlike regular Boosting, Gradient Boosting is using deeper Decision Trees with usually around 8 to 32 leafes.
+Now new predictions are made by using the Decision Tree to predict the residulas, multiply them
+with a learning rate, and adding them to the calculated mean.
+With the new predictions, the residuals are recalculate and the next Decision Tree is fit on to them. 
+This process gets repeated until a predetermined number of Decision Trees are added to the ensemble
+or when the models improvements fall under a given threshhold.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=.8\textwidth]{figures/gradient_boosting_prediction}
-    \caption{Gradient Boosting prediction example}
+    \caption{Gradient Boosting regression prediction example}
 \end{figure}
 
-% TODO: maybe add
-% \subsection{Extreme Gradient Boosting}
+% TODO: check formulations 
+For classification tasks, similar to regression, a naive prediction is being calculated.
+The way this is done depends on the implementation of Gradient Boosting. It can be the proportion of one
+class or it could be the log of the odds (logit) converted into a probability by putting it into sigmoid.
+Then the residuals are calculated by substracting the naive prediction from the class, and fits the them with
+a Decision Tree to minimize them.
+However in difference to the regression, the Decision Tree prediction and the naive prediciton can't just be added
+together, because the naive prediciton is in terms of the logit, and the result from the Deicision Tree is derived
+from a probability. Therfore the Decision Tree prediction must be transformed. The most common formular for
+transformation is:
 
+$$\frac{\sum Residual_i}{\sum [Previous \, Probability_i \cdot (1 - Previous \, Probability_i)]}$$
 
+Now the predicitons can be calculated by multiplying the learning rate to the new Decision Tree values and
+adding that to the naive prediction. This can then be converted to a probability with sigmoid.
+Like before, the new predictions can be used to recalculate the residuals and the next Decision Tree is fit on to them.
+The process gets repeated until it hits a stopping criteria. Those can be the same as the ones for regression.
+
+% Difference to normal boosting:
+% - different learning algorithm
+% - all trees have the same weight, resulting in an equal contribution to the final prediction
+% - TODO: advantages/ disadvantages of gradient boosting vs boosting
 % ---------------------------------------------------------------------------- %
 \section{Examples}
 In the examples, we aim to compare various ensemble learning algorithms - Bagging, 
