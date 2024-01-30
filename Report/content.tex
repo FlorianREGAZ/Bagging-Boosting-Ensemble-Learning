@@ -162,7 +162,6 @@ This works exactly the same for all other subsets.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Boosting}
-% TODO: mention that boosting is typically using stumpts with Decision trees
 Boosting \citep{Schapire1990} is another ensemble learning method like Bagging.
 However, unlike Bagging, Boosting trains the models sequentially, where each
 model learns from the mistakes of its predecessors.
@@ -242,15 +241,14 @@ or when the models improvements fall under a given threshhold.
     \caption{Gradient Boosting regression prediction example}
 \end{figure}
 
-% TODO: check formulations 
 For classification tasks, similar to regression, a naive prediction is being calculated.
 The way this is done depends on the implementation of Gradient Boosting. It can be the proportion of one
 class or it could be the log of the odds (logit) converted into a probability by putting it into sigmoid.
-Then the residuals are calculated by substracting the naive prediction from the class, and fits the them with
-a Decision Tree to minimize them.
-However in difference to the regression, the Decision Tree prediction and the naive prediciton can't just be added
-together, because the naive prediciton is in terms of the logit, and the result from the Deicision Tree is derived
-from a probability. Therfore the Decision Tree prediction must be transformed. The most common formular for
+Then the residuals are calculated by substracting the naive prediction from the class, and fits a Dicision
+Tree on them with in order to minimize the residuals.
+However in difference to regression, the Decision Tree values and the naive prediction can't just be added
+together. Thats because the naive prediction is in terms of the logit, and the result from the Deicision Tree is
+derived from a probability. Therfore the Decision Tree values must be transformed. The most common formular for
 transformation is:
 
 $$\frac{\sum Residual_i}{\sum [Previous \, Probability_i \cdot (1 - Previous \, Probability_i)]}$$
@@ -260,10 +258,6 @@ adding that to the naive prediction. This can then be converted to a probability
 Like before, the new predictions can be used to recalculate the residuals and the next Decision Tree is fit on to them.
 The process gets repeated until it hits a stopping criteria. Those can be the same as the ones for regression.
 
-% Difference to normal boosting:
-% - different learning algorithm
-% - all trees have the same weight, resulting in an equal contribution to the final prediction
-% - TODO: advantages/ disadvantages of gradient boosting vs boosting
 % ---------------------------------------------------------------------------- %
 \section{Examples}
 In the examples, we aim to compare various ensemble learning algorithms - Bagging, 
@@ -394,9 +388,28 @@ within the initial 50 estimators, beyond which there is a general tendency to pl
 However, AdaBoost stands as the exception to this rule, defying the common trend of stagnation observed in other methods.
 
 
+\subsection{Discussion}
+
+The examples indicate that at least one Boosting methods, AdaBoost or Gradient Boosting, is more accurate than Bagging and Random Forest.
+
 % TODO: add general conclusion of the examples
 % - talk about results of the examples
 % - talk about what results were expected and what the examples didn't show but is also important to know
+
+% Own results
+% - 
+
+% Popular Ensemble Methods: An Empirical Study (https://www.d.umn.edu/~rmaclin/cs5751/notes/opitz-jair99.pdf)
+% - Bagging ensemble nearly always outperforms a single classifier
+% - Boosting ensemble can greatly outperform both Bagging and a single classifier. However, for some data sets 
+%   Boosting may show zero gain or even a decrease in performance from a single classifier (due to overfitting on noisy data)
+% - much of the performance enhancement for an ensemble comes with the first few classifiers combined, but that Boosting decision
+%   trees may continue to further improve with larger ensemble sizes
+% - Conclusion: Bagging is appropritae for most problems, boosting when appropriate might be even better
+
+% Comparison among Methods of Ensemble Learning (https://ieeexplore.ieee.org/abstract/document/6597704)
+% -  there is no single winner here -> everything depends upon our domain and what we're going to do
+
 
 % ---------------------------------------------------------------------------- %
 \section{Summary and conclusion}
@@ -414,9 +427,10 @@ using methods like majority voting (classification) or averaging (regression).
 
 Boosting focuses on reducing bias. In this technique, models are trained sequentially,
 where each model attempts to correct the errors made by the previous one. Despite 
-the sequential training, predictions can be made in parallel. The final prediction
-is made similar to bagging. However, the performance of each model in the training 
-step determines how strong the influence is on the final prediction.
+the sequential training, predictions can be made in parallel. Furthermore, the
+performance of each model in the training step determines how strong the influence
+is on the final prediction. Therefire weighted averaging is used to build a final
+prediciton.
 
 
 The evolution of these methods into more advanced versions like Random Forests
