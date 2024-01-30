@@ -289,6 +289,8 @@ conducted on a system equipped with an AMD Ryzen 5 5600X CPU (3.7 GHz, 6 cores).
 
 \newpage % TODO: remove
 \subsection{Example 1}
+\label{sec:example1}
+
 In the first example we are using the Breast Cancer Wisconsin (Diagnostic)
 dataset by \citet*{breast_cancer_wisconsin}. The dataset originates from
 the University of Wisconsin Hospitals. It contains 30 features and has 569
@@ -315,15 +317,17 @@ the Bagging and Random forest ensemble.
 Overall, Gradient boosting performed best when also looking at the accuracy on the folds. Nevertheless,
 it also has the longest training time, and highest estimator count, which may be a trade-off to 
 consider depending on the application.
-Also \hyperref[fig:bcw_comparison]{Figure 5} shows that the performance of the ensemble learning 
+Also \hyperref[fig:bcw_comparison]{Figure 6} shows that the performance of the ensemble learning 
 methods mostly improve within the first 50 estimators, then it only changes slightly until around 220 estimators.
 After 220 estimators it nearly stagnates.
-Furthermore, as illustrated in \hyperref[fig:bcw_comparison]{Figure 5}, the performance gains of the ensemble
+Furthermore, as illustrated in \hyperref[fig:bcw_comparison]{Figure 6}, the performance gains of the ensemble
 learning methods are most pronounced within the first 50 estimators and tend to plateau beyond 220 estimators.
 This indicates diminishing returns with the addition of further estimators.
 
 \newpage % TODO: remove
 \subsection{Example 2}
+\label{sec:example2}
+
 In the second example we are using the Heart Disease Cleveland dataset by
 \citet*{heart_disease_cleveland}. It contains 13 features and has 303 data 
 points. The goal of the dataset is to determine if a patient has a heart
@@ -348,7 +352,7 @@ nearly 4\% in accuracy, eventhough they have the same estimator count.
 Despite having the worst results on the folds, AdaBoost stood out with the highest accuracy on the validation set.
 This is particularly noteworthy considering that AdaBoost utilized the fewest estimators of all methods examined,
 yet managed to achieve the best performance.
-The results depicted in \hyperref[fig:hdc_comparison]{Figure 6} reveal a more volatile relationship between
+The results depicted in \hyperref[fig:hdc_comparison]{Figure 7} reveal a more volatile relationship between
 performance and estimator count compared to the first example. Consistent with the previous findings, the most
 substantial performance improvements occurred within the initial 50 estimators.
 A notable point of interest is the declining accuracy of AdaBoost as the number of estimators increase, suggesting
@@ -357,6 +361,8 @@ This underscores that more estimators can also have a negative effect on the gen
 
 \newpage % TODO: remove
 \subsection{Example 3}
+\label{sec:example3}
+
 In the third example we are using the day version of the Bike Sharing dataset by
 \citet*{bike_sharing}. It contains 13 features and has 731 data 
 points. The goal of the dataset is to determine the amount of bikes that are going
@@ -383,33 +389,30 @@ improvement, achieving its peak accuracy with 498 estimators. This suggests a po
 additional computational resources.
 Gradient Boosting, outperformed all other ensemble learning methods with a 0.1\% higher accuracy on the validation set than Random
 Forest.
-\hyperref[fig:bs_comparison]{Figure 7} reinforces a consistent observation: the majority of performance improvements are realized
+\hyperref[fig:bs_comparison]{Figure 8} reinforces a consistent observation: the majority of performance improvements are realized
 within the initial 50 estimators, beyond which there is a general tendency to plateau.
 However, AdaBoost stands as the exception to this rule, defying the common trend of stagnation observed in other methods.
 
 
 \subsection{Discussion}
+In \hyperref[sec:example3]{example 3}, Gradient Boosting emerged had the highest accuracy, while in \hyperref[sec:example2]{example 2},
+AdaBoost did best. In \hyperref[sec:example1]{example 1}, both AdaBoost and Gradient Boosting surpassed the performance of Decision Tree,
+Bagging, and Random Forest. 
+That might indicate that at least one Boosting method, AdaBoost or Gradient Boosting, is always more accurate than the other methods.
+However, research \citep{popular_ensemble_methods, comparison_ensemble_learning} indicates that there is no clear winner between these
+methods. The effectiveness of each method highly depends on the characteristics of the data. Nevertheless, there are heuristics that can
+guide the selection of the appropriate ensemble learning method and its hyperparameters.
 
-The examples indicate that at least one Boosting methods, AdaBoost or Gradient Boosting, is more accurate than Bagging and Random Forest.
+Bagging and Random Forest are generally reliable methods, provided the necessary computational resources are available. These methods
+also consistently outperform the Decision Tree.
+AdaBoost and Gradient Boosting are able to be considerably more accurate than Bagging and Random Forest, as demonstrated in the examples.
+Nonetheless, when the data is very noisy, Boosting is prone to overfitting, and might even perform worse than a Decision Tree.
+This can also be seen in \hyperref[fig:bs_comparison]{Figure 7}, where accuracy of AdaBoost decreases with an increasing number of estimators.
 
-% TODO: add general conclusion of the examples
-% - talk about results of the examples
-% - talk about what results were expected and what the examples didn't show but is also important to know
+Furthermore, the examples, as well as the studies show that the largest increase in accuracy is achieved with the first few estimators added to the 
+ensemble. However, Boosting algorithms are sometimes able to improve with larger ensemble sizes. This can be seen \hyperref[fig:bs_comparison]{Figure 8}.
 
-% Own results
-% - 
-
-% Popular Ensemble Methods: An Empirical Study (https://www.d.umn.edu/~rmaclin/cs5751/notes/opitz-jair99.pdf)
-% - Bagging ensemble nearly always outperforms a single classifier
-% - Boosting ensemble can greatly outperform both Bagging and a single classifier. However, for some data sets 
-%   Boosting may show zero gain or even a decrease in performance from a single classifier (due to overfitting on noisy data)
-% - much of the performance enhancement for an ensemble comes with the first few classifiers combined, but that Boosting decision
-%   trees may continue to further improve with larger ensemble sizes
-% - Conclusion: Bagging is appropritae for most problems, boosting when appropriate might be even better
-
-% Comparison among Methods of Ensemble Learning (https://ieeexplore.ieee.org/abstract/document/6597704)
-% -  there is no single winner here -> everything depends upon our domain and what we're going to do
-
+In conclusion, Bagging and Random Forest can be used for most problems, but Boosting methods might even be more accurate on suitable datasets. 
 
 % ---------------------------------------------------------------------------- %
 \section{Summary and conclusion}
